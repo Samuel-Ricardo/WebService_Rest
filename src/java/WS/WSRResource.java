@@ -42,6 +42,13 @@ public class WSRResource {
        return "chero d pneu q mado";
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/get")
+    public String getUsuario(){
+        return "\"Nome\": \" Sameul\" ";
+    }
+    
     /**
      * PUT method for updating or creating an instance of WSRResource
      * @param content representation for the resource
