@@ -5,6 +5,8 @@
  */
 package WS;
 
+import Model.User;
+import com.google.gson.Gson;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -46,7 +48,17 @@ public class WSRResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/get")
     public String getUsuario(){
-        return "\"Nome\": \" Sameul\" ";
+        
+        User user = new User();
+        
+        user.setEmail("pppp@gmail.com");
+        user.setLogin("fulano");
+        user.setSenha("123");
+        user.setPerfil("ADM");
+                
+        Gson json = new Gson();
+        
+        return json.toJson(user);
     }
     
     /**
