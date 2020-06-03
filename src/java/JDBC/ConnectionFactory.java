@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 public class ConnectionFactory {
 
     private static final String DRIVER = "com.mysql.jdbc.Driver";  // Driver location / local do Driver / 
-    private static final String URL = "jdbc:mysql://localhost:3308/barbershop";  // Database URL used in the MySQL case / URL do banco de dados usado no caso MySQL /
+    private static final String URL = "jdbc:mysql://localhost:3308/agendafx";  // Database URL used in the MySQL case / URL do banco de dados usado no caso MySQL /
     private static final String USER = "root"; // usuario 
     private static final String PASS = ""; //senha
 

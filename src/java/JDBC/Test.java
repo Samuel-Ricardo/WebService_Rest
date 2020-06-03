@@ -18,6 +18,11 @@ public class Test {
          Connection connection = ConnectionFactory.getConnection();
          ConnectionFactory.closeConnection(connection);
         
+         /* 
+         *se nao houver mensagem de erro, significa que conectou com sucesso.
+         *if there is no error message, it means that you connected successfully.
+         */
+         
     }
     
 }

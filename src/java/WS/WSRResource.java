@@ -5,8 +5,10 @@
  */
 package WS;
 
+import DAO.UserDAO;
 import Model.User;
 import com.google.gson.Gson;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -24,6 +26,8 @@ import javax.ws.rs.core.MediaType;
 @Path("WebSR")
 public class WSRResource {
 
+    private UserDAO dao = new UserDAO();
+    
     @Context
     private UriInfo context;
 
@@ -51,14 +55,14 @@ public class WSRResource {
         
         User user = new User();
         
-        user.setEmail("pppp@gmail.com");
-        user.setLogin("fulano");
-        user.setSenha("123");
-        user.setPerfil("ADM");
-                
+            List<User> list ;
+        
+            list = dao.selectAll();
+        
+        
         Gson json = new Gson();
         
-        return json.toJson(user);
+        return json.toJson(list);
     }
     
     /**
