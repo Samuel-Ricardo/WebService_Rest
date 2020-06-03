@@ -53,7 +53,7 @@ public class Consume {
             System.out.println(user1.getNome());
             
         }
-        
+     
     }
 
     private String sendGet(String url, String method) {

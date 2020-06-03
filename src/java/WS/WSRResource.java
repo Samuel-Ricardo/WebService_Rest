@@ -12,6 +12,7 @@ import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -75,6 +76,8 @@ public class WSRResource {
         return json.toJson(list);
     }
     
+    
+    
     /**
      * PUT method for updating or creating an instance of WSRResource
      * @param content representation for the resource
@@ -83,4 +86,18 @@ public class WSRResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void putJson(String content) {
     }
+    
+    @DELETE
+    @Path("User/delet/{login}")
+    public boolean delet(@PathParam("login") String login){
+        
+        User user = new User();
+        
+        user.setNome(login);
+        
+         user = dao.search(user);
+         
+         return dao.delete(user);
+    }
+    
 }
