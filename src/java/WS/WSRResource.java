@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 
 /**
@@ -27,6 +28,7 @@ import javax.ws.rs.core.MediaType;
 public class WSRResource {
 
     private UserDAO dao = new UserDAO();
+    private Gson json = new Gson();
     
     @Context
     private UriInfo context;
@@ -42,25 +44,33 @@ public class WSRResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces("application/text")
-    public String getJson() {
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("Usuario/get/{login}")
+    public String getUsuario(@PathParam("login") String login) {
         //TODO return proper representation object
-       return "chero d pneu q mado";
+        
+        User user = new User();
+        
+        user.setNome(login);
+        
+        List<User> users = dao.searchByName(login);
+                
+       return json.toJson(users);
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("Usuario/get")
-    public String getUsuario(){
+    public String getListUsuario(){
         
-        User user = new User();
+        
         
             List<User> list ;
         
             list = dao.selectAll();
         
         
-        Gson json = new Gson();
+        
         
         return json.toJson(list);
     }
