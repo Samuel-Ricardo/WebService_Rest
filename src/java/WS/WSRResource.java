@@ -78,7 +78,7 @@ public class WSRResource {
     }
     
     @POST
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Consumes({"application/json"})
     @Path("Usuario/inserir")
     public boolean inserir(String content){
         
@@ -96,7 +96,11 @@ public class WSRResource {
      */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public void putJson(String content) {
+    @Path("usuario/update")
+    public boolean update (String content) {
+        
+        User u = (User) json.fromJson(content, User.class);
+        return dao.update(u);
     }
     
     @DELETE

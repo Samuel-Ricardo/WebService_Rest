@@ -84,6 +84,31 @@ public class Consume {
         System.out.println("");
         
         /////////////////////////////////////////////////////////////
+       //                                                          //
+       //                                                          //
+       //                                                          //
+       ///////////////////// Atualizar //////////////////////////////
+     
+        System.out.println("");
+        System.out.println("----------------------------------------------------");
+        System.out.println("");
+        
+        u.setNome("Fulano");
+        u.setSenha("321");
+        u.setSexo("F");
+        
+        json = g.toJson(u);
+  
+        url = "http://localhost:8080/TWebServiceRest2/webresources/WebSR/Usuario/inserir";
+        
+        result = con.sendPost(url, json, "PUT");
+        System.out.println(result);
+        
+        System.out.println("");
+        System.out.println("----------------------------------------------------");
+        System.out.println("");
+        
+        /////////////////////////////////////////////////////////////
     }
 
     private String sendGet(String url, String method) {
