@@ -15,6 +15,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -74,6 +75,17 @@ public class WSRResource {
         
         
         return json.toJson(list);
+    }
+    
+    @POST
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Path("Usuario/inserir")
+    public boolean inserir(String content){
+        
+        Gson g = new Gson();
+        User u = (User) g.fromJson(content, User.class);
+        
+        return dao.insert(u);
     }
     
     

@@ -32,12 +32,14 @@ public class Consume {
     
     public static void main(String[] args) {
         
+        
+       /////////////////////// Select All ///////////////////////////////
         Consume con = new Consume();
         
-        String json = con.sendGet("http://localhost:8080/TWebServiceRest2/webresources/WebSR/Usuario/get","GET");
+        String result = con.sendGet("http://localhost:8080/TWebServiceRest2/webresources/WebSR/Usuario/get","GET");
         
         System.out.println("");
-        System.out.println(json);
+        System.out.println(result);
         System.out.println("");
         
        ArrayList<User> user = new ArrayList<>();
@@ -46,48 +48,76 @@ public class Consume {
         
         Gson g = new Gson();
         
-        user = g.fromJson(json, userType);
+        user = g.fromJson(result, userType);
         
         for (User user1 : user) {
             
             System.out.println(user1.getNome());
             
         }
+        
+       //////////////////////////////////////////////////////////////
+       //                                                          //
+       //                                                          //
+       //                                                          //
+       ////////////////////// Insert ////////////////////////////////
      
+        System.out.println("");
+        System.out.println("----------------------------------------------------");
+        System.out.println("");
+        
+        User u = new User();
+        
+        u.setNome("Fulano");
+        u.setSenha("321");
+        u.setSexo("F");
+        
+        String json = g.toJson(u);
+  
+        String url = "http://localhost:8080/TWebServiceRest2/webresources/WebSR/Usuario/inserir";
+        
+        result = con.sendPost(url, json, "POST");
+        System.out.println(result);
+        
+        System.out.println("");
+        System.out.println("----------------------------------------------------");
+        System.out.println("");
+        
+        /////////////////////////////////////////////////////////////
     }
 
     private String sendGet(String url, String method) {
        
         try {
             
-            URL obj = new URL(url);
+            URL link = new URL(url);
             
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            HttpURLConnection connection = (HttpURLConnection) link.openConnection();
             
-            con.setRequestMethod(method);
+            connection.setRequestMethod(method);
             
-            con.setRequestProperty("User-Agent", USER_AGENT);
+            connection.setRequestProperty("User-Agent", USER_AGENT);
             
-            int responseCode = con.getResponseCode();
+            int responseCode = connection.getResponseCode();
             System.out.println("\nSending 'GET' request to URL : "+ url);
             System.out.println("Response Code: "+responseCode);
             
-            BufferedReader in = new BufferedReader(
+            BufferedReader input = new BufferedReader(
                  
-                 new InputStreamReader(con.getInputStream())  
+                 new InputStreamReader(connection.getInputStream())  
             
             );
             
             String inputLine;
             StringBuffer response = new StringBuffer();
             
-            while((inputLine = in.readLine()) != null){
+            while((inputLine = input.readLine()) != null){
                 
                 response.append(inputLine);
                 
             }
             
-            in.close();
+            input.close();
             
  
             return response.toString();
@@ -100,7 +130,7 @@ public class Consume {
        return null;
     }
     
-    public void sendPost(String url, String urlParameters, String method){
+    public String sendPost(String url, String urlParameters, String method){
         
         try {
             
@@ -140,7 +170,7 @@ public class Consume {
             
             in.close();
             
-            System.out.println(response.toString());
+            return response.toString();
             
         } catch (MalformedURLException ex) {
             Logger.getLogger(Consume.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,7 +178,7 @@ public class Consume {
             Logger.getLogger(Consume.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        
+        return null;
     }
     
 }
